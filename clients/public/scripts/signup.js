@@ -1,20 +1,12 @@
-const passwordInput = document.getElementById("password") as HTMLInputElement;
-const toggleIcon = document.getElementById("visibility") as HTMLImageElement;
-const form = document.getElementById("signupForm") as HTMLFormElement;
-const emailErrorBox = document.getElementById(
-  "erroruseremail"
-) as HTMLParagraphElement;
-const usernameErrorBox = document.getElementById(
-  "errorusername"
-) as HTMLParagraphElement;
-const passwordErrorBox = document.getElementById(
-  "errorpassword"
-) as HTMLParagraphElement;
+const passwordInput = document.getElementById("password");
+const toggleIcon = document.getElementById("visibility");
+const form = document.getElementById("signupForm");
+const emailErrorBox = document.getElementById("erroruseremail");
+const usernameErrorBox = document.getElementById("errorusername");
+const passwordErrorBox = document.getElementById("errorpassword");
 console.log(passwordErrorBox);
-
 toggleIcon?.addEventListener("click", () => {
   if (!passwordInput) return;
-
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
     toggleIcon.src =
@@ -25,24 +17,20 @@ toggleIcon?.addEventListener("click", () => {
       "./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
   }
 });
-
-form?.addEventListener("submit", (e): void => {
+form?.addEventListener("submit", (e) => {
   console.log("clicked");
   e.preventDefault();
   const formData = new FormData(form);
   const username = formData.get("username")?.toString().trim();
   const email = formData.get("email")?.toString().trim();
   const password = formData.get("password")?.toString().trim();
-
   let isValid = true;
-
   if (!username) {
     usernameErrorBox.textContent = "Username is required";
     isValid = false;
   } else {
     usernameErrorBox.textContent = "";
   }
-
   // Validate email
   if (!email) {
     emailErrorBox.textContent = "Email is required";
@@ -53,7 +41,6 @@ form?.addEventListener("submit", (e): void => {
   } else {
     emailErrorBox.textContent = "";
   }
-
   if (!password) {
     passwordErrorBox.textContent = "Password is required";
     isValid = false;
@@ -70,3 +57,5 @@ form?.addEventListener("submit", (e): void => {
     console.log("Form data:", data);
   }
 });
+export {};
+//# sourceMappingURL=signup.js.map
