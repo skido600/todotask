@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
-    "dev": "concurrently \"tsc --watch\" \"npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch\""
+    "dev": "concurrently \"tsc --watch\" \"npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch\"",
+     "build": "vite build"
   },
   "keywords": [],
   "author": "",

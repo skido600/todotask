@@ -1,10 +1,7 @@
 # dependencies
 /node_modules
 
-# build outputs
-/dist
 
-dist
 # TS cache
 *.tsbuildinfo
 
