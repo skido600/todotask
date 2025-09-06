@@ -15,28 +15,33 @@
             <p class="text-sm font-bold">
               Log in to access your tasks and stay on top of your day.
             </p>
-            <!-- <img
-              src="./img/favorite_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
-              alt="for the love of God"
-              class="mt-2" /> -->
           </div>
           <p class="text-sm mt-1 text-gray-400">
             Manage your to-dos, track progress, and get things done efficiently.
           </p>
         </header>
-
-        <form class="mt-7">
+        <!-- loader -->
+        <div
+          id="loader"
+          class="fixed inset-0 bg-white flex items-center justify-center z-50">
+          <div
+            class="animate-spin rounded-full h-12 w-12 border-t-4 border-black"></div>
+        </div>
+        <form class="mt-7" id="LoginForm">
           <label for="email" class="block font-bold my-2">Email/Username</label>
           <div
             class="border border-slate-700 rounded-lg flex px-3 items-center">
             <img src="./img/email.svg" alt="email" />
             <input
               id="email"
+              name="email"
               type="text"
               class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
               placeholder="Email/Username" />
           </div>
+          <p class="text-red-700 text-sm" id="erroruseremail"></p>
 
+          <!-- password -->
           <label for="password" class="block font-bold mt-6 my-2"
             >Password</label
           >
@@ -48,30 +53,17 @@
             <input
               id="password"
               type="password"
+              name="password"
               class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
               placeholder="Password" />
             <span>
               <img
+                id="visibility"
                 src="./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
-                alt="" />
+                alt="password_toggle" />
             </span>
           </div>
-
-          <div class="flex justify-between items-center mt-4">
-            <!-- <div class="flex items-center">
-              <div
-                id="rememberMeId"
-                class="flex items-center cursor-pointer relative h-5 w-5 border border-[#DA0037] rounded"></div>
-              <label for="rememberMeId" class="ml-2 text-sm">Remember Me</label>
-            </div> -->
-            <!-- <a class="text-[#DA0037] font-bold text-sm" href="/resetpassword"
-              >Forgotten Password?</a
-            > -->
-          </div>
-          <!-- 
-          <p class="text-orange-300 text-sm text-center mt-4">
-            Fill in valid login credentials to continue.
-          </p> -->
+          <p class="text-red-700 text-sm" id="errorpassword"></p>
 
           <button
             type="submit"
@@ -91,6 +83,6 @@
       </main>
     </div>
 
-    <script src="../dist/main.js" type="module"></script>
+    <script src="./scripts/main.js" type="module"></script>
   </body>
 </html>

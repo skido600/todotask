@@ -17,10 +17,6 @@
                 Welcome! Create your account and start organizing your tasks
                 effortlessly. 👍
               </p>
-              <!-- <img
-              src="./img/favorite_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
-              alt="for the love of God"
-              class="mt-2" /> -->
             </div>
             <p class="text-sm mt-1 text-gray-400">
               Manage your to-dos, track progress, and get things done
@@ -63,6 +59,12 @@
               >Password</label
             >
             <div
+              id="loader"
+              class="fixed inset-0 bg-white flex items-center justify-center z-50">
+              <div
+                class="animate-spin rounded-full h-12 w-12 border-t-4 border-black"></div>
+            </div>
+            <div
               class="border border-slate-700 rounded-lg flex px-3 items-center">
               <img
                 src="./img/passkey_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
@@ -91,7 +93,7 @@
               <p>
                 Already have and account?<a
                   class="font-bold text-[#FF008B] hover:underline ml-1"
-                  href="./signup.html"
+                  href="./login.html"
                   >Login in</a
                 >
               </p>
@@ -101,6 +103,6 @@
       </div>
     </div>
 
-    <script src="./scripts/signup.js" type="module"></script>
+    <script src="./scripts/main.js" type="module"></script>
   </body>
 </html>
