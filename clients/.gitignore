@@ -3,7 +3,7 @@
 
 # build outputs
 /dist
-/src/output.css
+
 dist
 # TS cache
 *.tsbuildinfo
