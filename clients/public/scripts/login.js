@@ -5,13 +5,23 @@ function Loginauth() {
   const errorpassword = document.getElementById("errorpassword");
   const password_vis = document.getElementById("visibility");
   const passwordInput = document.getElementById("password");
+  console.log(passwordInput, password_vis);
   const form = document.getElementById("LoginForm");
   if (!form) {
     console.error("LoginForm not found!");
     return;
   }
   password_vis?.addEventListener("click", () => {
-    ToggleHandle(passwordInput, password_vis);
+    if (!passwordInput) return;
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      password_vis.src =
+        "./img/visibility_off_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
+    } else {
+      passwordInput.type = "password";
+      password_vis.src =
+        "./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
+    }
   });
   form?.addEventListener("submit", (e) => {
     console.log("clicked");
@@ -42,6 +52,8 @@ function Loginauth() {
       console.log(isValid);
       const data = { email_username, password };
       console.log("Form data:", data);
+      window.location.href = "../../adim.html";
+      console.log((window.location.href = "./adim.html"));
     }
   });
 }

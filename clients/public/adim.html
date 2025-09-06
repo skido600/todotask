@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./src/output.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Topbar -->
+    <header
+      class="fixed top-0 left-0 right-0 flex items-center justify-between bg-white border-b border-gray-300 px-4 py-3 z-40">
+      <!-- Left: Mobile toggle button -->
+      <button
+        id="menu-toggle"
+        class="md:hidden text-gray-700 focus:outline-none">
+        ☰
+      </button>
+      <!-- Logo -->
+      <div class="md:block hidden">logo</div>
+      <!-- Right: User -->
+      <div class="flex items-center gap-x-2">
+        <span>Logout</span>
+        <img
+          src="./img/logout_26dp_8B1A10_FILL0_wght400_GRAD0_opsz24.svg"
+          alt="profile" />
+      </div>
+    </header>
+
+    <!-- Page Layout -->
+    <div class="flex h-screen pt-14">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="fixed top-12 left-0 h-screen w-64 bg-gray-800 text-white transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-30">
+        <nav class="space-y-3 px-2 py-3">
+          <div class="flex items-center">
+            <span
+              ><img
+                src="./img/bookmark_manager_26dp_EFEFEF_FILL0_wght400_GRAD0_opsz24.svg"
+                alt=""
+            /></span>
+            <a href="#" class="block px-1 py-2 rounded hover:bg-gray-700"
+              >Task/management</a
+            >
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="closesidebar" class="flex-1 p-6 md:ml-64 overflow-y-auto">
+        <h2 class="text-2xl font-semibold mb-4">Welcome, Admin 👋</h2>
+        <p class="mb-6 text-gray-600">Record, manage, and build your tasks</p>
+        <form id="taskForm" class="space-y-4">
+          <!-- task header -->
+          <input
+            type="text"
+            id="taskTitle"
+            placeholder="Task title"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-blue-300 focus:outline-none" />
+          <p id="titleError" class="text-red-500 text-sm hidden"></p>
+
+          <!-- Task input -->
+          <textarea
+            id="taskInput"
+            rows="4"
+            placeholder="Write your task here..."
+            class="w-full border border-gray-300 resize-none rounded-lg p-3 focus:ring focus:ring-blue-300 focus:outline-none"></textarea>
+          <p id="descError" class="text-red-500 text-sm hidden"></p>
+          <div
+            id="loader"
+            class="fixed inset-0 bg-white flex items-center justify-center z-50">
+            <div
+              class="animate-spin rounded-full h-12 w-12 border-t-4 border-black"></div>
+          </div>
+          <!-- Submit button -->
+          <button
+            type="submit"
+            class="bg-gray-800 text-white px-4 py-2 rounded-lg transition">
+            Add Task
+          </button>
+
+          <ul id="taskList" class="space-y-3"></ul>
+        </form>
+      </main>
+      <script src="./scripts/main.js" type="module"></script>
+    </div>
+  </body>
+</html>

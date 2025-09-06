@@ -6,7 +6,7 @@ function HandlSignup() {
   const emailErrorBox = document.getElementById("erroruseremail");
   const usernameErrorBox = document.getElementById("errorusername");
   const passwordErrorBox = document.getElementById("errorpassword");
-  console.log(passwordErrorBox);
+
   toggleIcon?.addEventListener("click", () => {
     ToggleHandle(passwordInput, toggleIcon);
     // if (!passwordInput) return;
