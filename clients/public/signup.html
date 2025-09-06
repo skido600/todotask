@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/output.css" />
+    <title>Document</title>
+  </head>
+  <body class="bg-black">
+    <div class="w-screen h-screen flex justify-center items-center">
+      <div class="overflow-auto max-h-screen flex flex-col justify-center">
+        <main class="text-white max-w-sm px-4">
+          <header>
+            <h1 class="mb-2 mt-12 font-bold text-2xl">Get started</h1>
+            <div>
+              <p class="text-sm font-bold">
+                Welcome! Create your account and start organizing your tasks
+                effortlessly. 👍
+              </p>
+              <!-- <img
+              src="./img/favorite_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
+              alt="for the love of God"
+              class="mt-2" /> -->
+            </div>
+            <p class="text-sm mt-1 text-gray-400">
+              Manage your to-dos, track progress, and get things done
+              efficiently with Ai powered.
+            </p>
+          </header>
+
+          <form class="mt-7" id="signupForm">
+            <!-- username -->
+            <label for="email" class="block font-bold my-2">Username</label>
+            <div
+              class="border border-slate-700 rounded-lg flex px-3 items-center">
+              <img
+                src="./img/contacts_product_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
+                alt="email" />
+              <input
+                id="email"
+                type="text"
+                name="username"
+                class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
+                placeholder="John" />
+            </div>
+
+            <p class="text-red-700 text-sm" id="errorusername"></p>
+            <!-- Email -->
+            <label for="email" class="block font-bold my-2">Email</label>
+            <div
+              class="border border-slate-700 rounded-lg flex px-3 items-center">
+              <img src="./img/email.svg" alt="email" />
+              <input
+                id="email"
+                type="text"
+                name="email"
+                class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
+                placeholder="John" />
+            </div>
+            <p class="text-red-700 text-sm" id="erroruseremail"></p>
+            <!-- password -->
+            <label for="password" class="block font-bold mt-6 my-2"
+              >Password</label
+            >
+            <div
+              class="border border-slate-700 rounded-lg flex px-3 items-center">
+              <img
+                src="./img/passkey_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
+                alt="password" />
+              <input
+                id="password"
+                type="password"
+                name="password"
+                class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
+                placeholder="Password" />
+              <!-- <span> -->
+              <img
+                id="visibility"
+                src="./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
+                alt="password visibility" />
+              <!-- </span> -->
+            </div>
+            <p class="text-red-700 text-sm" id="errorpassword"></p>
+
+            <button
+              type="submit"
+              class="w-full font-bold rounded-lg py-3 mt-4 transition-colors bg-white text-black cursor-pointer">
+              Login
+            </button>
+            <div class="flex justify-center">
+              <p>
+                Already have and account?<a
+                  class="font-bold text-[#FF008B] hover:underline ml-1"
+                  href="./signup.html"
+                  >Login in</a
+                >
+              </p>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+
+    <script src="../dist/signup.js" type="module"></script>
+  </body>
+</html>
