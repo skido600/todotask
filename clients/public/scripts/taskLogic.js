@@ -31,7 +31,7 @@ function Task() {
   checkTokenAndLogout(userData);
 
   admin_name.textContent = ` Welcome, ${userData.username} 👋`;
-  const API_URL = "http://localhost:9000/api";
+  const API_URL = "https://todotask-4.onrender.com/api";
 
   // Sidebar toggle
   toggleBtn.addEventListener("click", () => {
@@ -61,7 +61,7 @@ function Task() {
       });
 
       const tasks = await res.json();
-      console.log(tasks);
+
       const taskdata = tasks.data;
       //if task is empty
       if (!taskdata || taskdata.length === 0) {
@@ -86,7 +86,7 @@ function Task() {
     li.className =
       "bg-white p-3 rounded-lg border border-gray-300 shadow space-y-2";
     const timestamp = document.createElement("p");
-    timestamp.className = "text-[3px] mt-4";
+    timestamp.className = "text-[10px] mt-4";
     li.dataset.id = task._id;
 
     li.innerHTML = "";

@@ -6,7 +6,6 @@ function decodeToken(token) {
     const decodedPayload = JSON.parse(atob(payloadBase64));
     return decodedPayload;
   } catch (error) {
-    console.error("Failed to decode token:", error);
     return null;
   }
 }

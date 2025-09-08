@@ -13,7 +13,6 @@ function HandlSignup() {
     ToggleHandle(passwordInput, toggleIcon);
   });
   form?.addEventListener("submit", async (e) => {
-    console.log("clicked");
     e.preventDefault();
     const formData = new FormData(form);
     const username = formData.get("username")?.toString().trim();
@@ -41,27 +40,25 @@ function HandlSignup() {
       isValid = false;
     } else if (password.length < 6) {
       passwordErrorBox.textContent = "Password must be at least 6 characters";
-      console.log(isValid);
+
       isValid = false;
     } else {
       passwordErrorBox.textContent = "";
     }
-    // if (isValid) {
-    //   console.log(isValid);
-    //   const data = { username, email, password };
-    //   console.log("Form data:", data);
-    // }
+
     if (isValid) {
       showButtonLoader();
       try {
-        const res = await fetch("http://localhost:9000/auth/createuser", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, email, password }),
-        });
+        const res = await fetch(
+          "https://todotask-4.onrender.com/auth/createuser",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password }),
+          }
+        );
 
         const response = await res.json();
-        console.log("Server response:", response);
 
         if (response.success) {
           showToast(response.message, "bg-green-500");
@@ -70,7 +67,6 @@ function HandlSignup() {
           showToast(response.message || "Login failed", "bg-red-500");
         }
       } catch (err) {
-        console.error("Error:", err.message);
         showToast(err.message || "Something went wrong", "bg-red-500");
       } finally {
         hideButtonLoader("sign up");

@@ -2,11 +2,6 @@ function showButtonLoader(message = "Loading...") {
   const btnText = document.getElementById("btn_text");
   const btnSubmit = document.getElementById("btn_submit");
 
-  if (!btnText || !btnSubmit) {
-    console.error("Button elements not found!");
-    return;
-  }
-
   btnText.textContent = message;
   btnSubmit.disabled = true;
   btnSubmit.classList.add("opacity-50", "cursor-not-allowed");

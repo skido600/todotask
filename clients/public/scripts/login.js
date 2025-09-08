@@ -9,16 +9,12 @@ function Loginauth() {
   const passwordInput = document.getElementById("password");
 
   const form = document.getElementById("LoginForm");
-  if (!form) {
-    console.error("LoginForm not found!");
-    return;
-  }
+
   password_vis?.addEventListener("click", () => {
     ToggleHandle(passwordInput, password_vis);
   });
 
   form?.addEventListener("submit", async (e) => {
-    console.log("clicked");
     e.preventDefault();
     const formData = new FormData(form);
     const email_username = formData.get("email")?.toString().trim();
@@ -35,7 +31,7 @@ function Loginauth() {
       isValid = false;
     } else if (password.length < 6) {
       errorpassword.textContent = "Password must be at least 6 characters";
-      console.log(isValid);
+
       isValid = false;
     } else {
       errorpassword.textContent = "";
@@ -45,25 +41,26 @@ function Loginauth() {
     if (isValid) {
       showButtonLoader();
       try {
-        const res = await fetch("http://localhost:9000/auth/loginuser", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email_username, password }),
-        });
+        const res = await fetch(
+          "https://todotask-4.onrender.com/auth/loginuser",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email_username, password }),
+          }
+        );
 
         const response = await res.json();
-        console.log("Server response:", response);
 
         if (response.success) {
           localStorage.setItem("token", response.data);
-          console.log(response.data);
+
           showToast(response.message, "bg-green-500");
-          window.location.href = "./adim.html";
+          window.location.href = "./admin.html";
         } else {
           showToast(response.message || "Login failed", "bg-red-500");
         }
       } catch (err) {
-        console.error("Error:", err.message);
         showToast(err.message || "Something went wrong", "bg-red-500");
       } finally {
         hideButtonLoader("login");
