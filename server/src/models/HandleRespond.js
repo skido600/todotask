@@ -1,6 +1,7 @@
-const HandleResponse = (res, status, message, data = null) => {
-  res.status(status).json({
-    status,
+const HandleResponse = (res, success, statuscode, message, data = null) => {
+  res.status(statuscode).json({
+    success,
+    statuscode,
     message,
     data,
   });

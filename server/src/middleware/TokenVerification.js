@@ -5,15 +5,15 @@ import { HandleResponse } from "../models/HandleRespond.js";
 async function authmiddlware(req, res, next) {
   try {
     const authheader = req.headers["authorization"];
-    const token = authheader && authheader.split("")[1];
+    const token = authheader && authheader.split(" ")[1];
     if (!token) {
-      return HandleResponse(res, "TOken not found");
+      return HandleResponse(res, false, 401, "TOken not found");
     }
     const decodeToken = jwt.verify(token, jwt_Token);
     if (!decodeToken) {
-      return HandleResponse(res, "invalid Token");
+      return HandleResponse(res, false, 403, "invalid Token");
     }
-    req.user = decoded;
+    req.user = decodeToken;
     next();
   } catch (error) {
     next(error);
@@ -21,3 +21,17 @@ async function authmiddlware(req, res, next) {
 }
 
 export default authmiddlware;
+
+// {
+
+//   "email":"testing@gmail.com",
+//   "password":"testing123"
+// }
+
+// {
+
+//   "description":"task man list",
+//   "todo":"i cook"
+// }
+
+// http://localhost:9000/api/create

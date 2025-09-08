@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="./src/output.css" />
   </head>
   <body class="bg-gray-100">
+    <div class="flex justify-center">
+      <div class="absolute text-white z-50 top-7" id="toast"></div>
+    </div>
+
     <!-- Topbar -->
     <header
       class="fixed top-0 left-0 right-0 flex items-center justify-between bg-white border-b border-gray-300 px-4 py-3 z-40">
@@ -19,7 +23,7 @@
       <!-- Logo -->
       <div class="md:block hidden">logo</div>
       <!-- Right: User -->
-      <div class="flex items-center gap-x-2">
+      <div class="flex items-center gap-x-2" id="logout">
         <span>Logout</span>
         <img
           src="./img/logout_26dp_8B1A10_FILL0_wght400_GRAD0_opsz24.svg"
@@ -49,7 +53,9 @@
 
       <!-- Main Content -->
       <main id="closesidebar" class="flex-1 p-6 md:ml-64 overflow-y-auto">
-        <h2 class="text-2xl font-semibold mb-4">Welcome, Admin 👋</h2>
+        <h2 id="admin_name" class="text-sm font-semibold mb-4">
+          Welcome, Admin 👋
+        </h2>
         <p class="mb-6 text-gray-600">Record, manage, and build your tasks</p>
         <form id="taskForm" class="space-y-4">
           <!-- task header -->
@@ -74,14 +80,21 @@
               class="animate-spin rounded-full h-12 w-12 border-t-4 border-black"></div>
           </div>
           <!-- Submit button -->
-          <button
+          <!-- <button
             type="submit"
-            class="bg-gray-800 text-white px-4 py-2 rounded-lg transition">
-            Add Task
+            class="">
+      
+          </button> -->
+          <button
+            id="btn_submit"
+            type="submit"
+            class="bg-gray-800 text-white px-4 py-2 rounded-[2px] transition">
+            <span id="btn_text"> Add Task</span>
           </button>
 
           <ul id="taskList" class="space-y-3"></ul>
         </form>
+        <p class="text-[3px]">created by leowave</p>
       </main>
       <script src="./scripts/main.js" type="module"></script>
     </div>

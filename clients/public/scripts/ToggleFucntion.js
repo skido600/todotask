@@ -1,5 +1,4 @@
 function ToggleHandle(passinput, icon) {
-  console.log(icon, passinput);
   if (!passinput) return;
   if (passinput.type === "password") {
     passinput.type = "text";

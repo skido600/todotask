@@ -1,4 +1,6 @@
+import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import ToggleHandle from "./ToggleFucntion.js";
+import showToast from "./showToast.js";
 function HandlSignup() {
   const passwordInput = document.getElementById("password");
   const toggleIcon = document.getElementById("visibility");
@@ -9,18 +11,8 @@ function HandlSignup() {
 
   toggleIcon?.addEventListener("click", () => {
     ToggleHandle(passwordInput, toggleIcon);
-    // if (!passwordInput) return;
-    // if (passwordInput.type === "password") {
-    //   passwordInput.type = "text";
-    //   toggleIcon.src =
-    //     "./img/visibility_off_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
-    // } else {
-    //   passwordInput.type = "password";
-    //   toggleIcon.src =
-    //     "./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
-    // }
   });
-  form?.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", async (e) => {
     console.log("clicked");
     e.preventDefault();
     const formData = new FormData(form);
@@ -54,10 +46,35 @@ function HandlSignup() {
     } else {
       passwordErrorBox.textContent = "";
     }
+    // if (isValid) {
+    //   console.log(isValid);
+    //   const data = { username, email, password };
+    //   console.log("Form data:", data);
+    // }
     if (isValid) {
-      console.log(isValid);
-      const data = { username, email, password };
-      console.log("Form data:", data);
+      showButtonLoader();
+      try {
+        const res = await fetch("http://localhost:9000/auth/createuser", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, email, password }),
+        });
+
+        const response = await res.json();
+        console.log("Server response:", response);
+
+        if (response.success) {
+          showToast(response.message, "bg-green-500");
+          window.location.href = "./login.html";
+        } else {
+          showToast(response.message || "Login failed", "bg-red-500");
+        }
+      } catch (err) {
+        console.error("Error:", err.message);
+        showToast(err.message || "Something went wrong", "bg-red-500");
+      } finally {
+        hideButtonLoader("sign up");
+      }
     }
   });
 }

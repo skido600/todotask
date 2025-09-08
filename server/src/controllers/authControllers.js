@@ -3,7 +3,6 @@ import { HandleResponse } from "../models/HandleRespond.js";
 import User from "../models/UserSchema.js";
 import { SignupVal, LoginVal } from "../validator/validate.js";
 import bcrypt from "bcrypt";
-
 import jwt from "jsonwebtoken";
 
 const Signup = async (req, res, next) => {
@@ -15,11 +14,16 @@ const Signup = async (req, res, next) => {
       password,
     });
     if (error) {
-      return HandleResponse(res, 400, error.details[0].message);
+      return HandleResponse(res, false, 400, error.details[0].message);
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return HandleResponse(res, 400, "User with this email already exists");
+      return HandleResponse(
+        res,
+        false,
+        400,
+        "User with this email already exists"
+      );
     }
 
     const salt = bcrypt.genSaltSync(Number(gensalt));
@@ -32,6 +36,7 @@ const Signup = async (req, res, next) => {
     await newUser.save();
     return HandleResponse(
       res,
+      true,
       201,
       `User ${newUser.username} successfully created`
     );
@@ -48,18 +53,20 @@ const Login = async (req, res, next) => {
       password,
     });
     if (error) {
-      return HandleResponse(res, 400, error.details[0].message);
+      return HandleResponse(res, false, 400, error.details[0].message);
     }
     const userdetails = await User.findOne({ email });
     if (!userdetails) {
-      return HandleResponse(res, 400, "User email not found");
+      return HandleResponse(res, false, 404, "User email not found");
     }
     const isMatch = await bcrypt.compare(password, userdetails.password);
     if (!isMatch) {
-      return HandleResponse(res, 401, "Invalid credentials");
+      return HandleResponse(res, false, 401, "Invalid credentials");
     }
+    console.log({ username: userdetails.username });
     const token = jwt.sign(
       {
+        username: userdetails.username,
         userid: userdetails._id,
         email: userdetails.email,
       },
@@ -68,16 +75,10 @@ const Login = async (req, res, next) => {
     );
 
     if (!token) {
-      return HandleResponse(res, 404, "TOken not found");
+      return HandleResponse(res, false, 404, "TOken not found");
     }
 
-    res.cookie("access_token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Send cookie only over HTTPS in production
-      maxAge: 3600000, // Cookie expiration in milliseconds (e.g., 1 hour)
-      sameSite: "Lax", // Helps mitigate CSRF attacks
-    });
-    return HandleResponse(res, 200, `user Login successfully`, token);
+    return HandleResponse(res, true, 200, `user Login successfully`, token);
   } catch (error) {
     next(error);
   }

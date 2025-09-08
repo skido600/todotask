@@ -1,29 +1,23 @@
 import ToggleHandle from "./ToggleFucntion.js";
+import { showButtonLoader, hideButtonLoader } from "./Loader.js";
+import showToast from "./showToast.js";
 
 function Loginauth() {
   const error_username_email = document.getElementById("erroruseremail");
   const errorpassword = document.getElementById("errorpassword");
-  const password_vis = document.getElementById("visibility");
+  const password_vis = document.getElementById("visibility_login");
   const passwordInput = document.getElementById("password");
-  console.log(passwordInput, password_vis);
+
   const form = document.getElementById("LoginForm");
   if (!form) {
     console.error("LoginForm not found!");
     return;
   }
   password_vis?.addEventListener("click", () => {
-    if (!passwordInput) return;
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      password_vis.src =
-        "./img/visibility_off_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
-    } else {
-      passwordInput.type = "password";
-      password_vis.src =
-        "./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg";
-    }
+    ToggleHandle(passwordInput, password_vis);
   });
-  form?.addEventListener("submit", (e) => {
+
+  form?.addEventListener("submit", async (e) => {
     console.log("clicked");
     e.preventDefault();
     const formData = new FormData(form);
@@ -31,7 +25,7 @@ function Loginauth() {
     const password = formData.get("password")?.toString().trim();
     let isValid = true;
     if (!email_username) {
-      error_username_email.textContent = "email/username is required";
+      error_username_email.textContent = "email is required";
       isValid = false;
     } else {
       error_username_email.textContent = "";
@@ -49,11 +43,31 @@ function Loginauth() {
 
     //submit
     if (isValid) {
-      console.log(isValid);
-      const data = { email_username, password };
-      console.log("Form data:", data);
-      window.location.href = "../../adim.html";
-      console.log((window.location.href = "./adim.html"));
+      showButtonLoader();
+      try {
+        const res = await fetch("http://localhost:9000/auth/loginuser", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email_username, password }),
+        });
+
+        const response = await res.json();
+        console.log("Server response:", response);
+
+        if (response.success) {
+          localStorage.setItem("token", response.data);
+          console.log(response.data);
+          showToast(response.message, "bg-green-500");
+          window.location.href = "./adim.html";
+        } else {
+          showToast(response.message || "Login failed", "bg-red-500");
+        }
+      } catch (err) {
+        console.error("Error:", err.message);
+        showToast(err.message || "Something went wrong", "bg-red-500");
+      } finally {
+        hideButtonLoader("login");
+      }
     }
   });
 }

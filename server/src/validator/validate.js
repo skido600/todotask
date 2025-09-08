@@ -13,5 +13,8 @@ const LoginVal = joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
   password: joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
-
-export { SignupVal, LoginVal };
+const Todo = joi.object({
+  description: joi.string().min(3).required(),
+  todo: joi.string().min(3).required(),
+});
+export { SignupVal, LoginVal, Todo };

@@ -8,6 +8,7 @@
   </head>
   <body class="bg-black">
     <div class="w-screen h-screen flex justify-center items-center">
+      <div class="absolute text-white top-7" id="toast"></div>
       <main class="text-white max-w-sm px-4">
         <header>
           <h1 class="mb-2 font-bold text-2xl">Welcome Back</h1>
@@ -20,6 +21,8 @@
             Manage your to-dos, track progress, and get things done efficiently.
           </p>
         </header>
+        <!-- toast -->
+
         <!-- loader -->
         <div
           id="loader"
@@ -28,7 +31,7 @@
             class="animate-spin rounded-full h-12 w-12 border-t-4 border-black"></div>
         </div>
         <form class="mt-7" id="LoginForm">
-          <label for="email" class="block font-bold my-2">Email/Username</label>
+          <label for="email" class="block font-bold my-2">Email</label>
           <div
             class="border border-slate-700 rounded-lg flex px-3 items-center">
             <img src="./img/email.svg" alt="email" />
@@ -37,7 +40,7 @@
               name="email"
               type="text"
               class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
-              placeholder="Email/Username" />
+              placeholder="Email" />
           </div>
           <p class="text-red-700 text-sm" id="erroruseremail"></p>
 
@@ -58,7 +61,7 @@
               placeholder="Password" />
             <span>
               <img
-                id="visibility"
+                id="visibility_login"
                 src="./img/visibility_24dp_FF008B_FILL0_wght400_GRAD0_opsz24.svg"
                 alt="password_toggle" />
             </span>
@@ -66,9 +69,10 @@
           <p class="text-red-700 text-sm" id="errorpassword"></p>
 
           <button
+            id="btn_submit"
             type="submit"
-            class="w-full font-bold rounded-lg py-3 mt-4 transition-colors bg-white text-black">
-            Login
+            class="w-full font-bold rounded-lg py-3 mt-4 transition-colors bg-white text-black flex items-center justify-center gap-2">
+            <span id="btn_text">Login</span>
           </button>
           <div class="flex justify-center">
             <p>

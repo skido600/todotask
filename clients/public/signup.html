@@ -8,6 +8,7 @@
   </head>
   <body class="bg-black">
     <div class="w-screen h-screen flex justify-center items-center">
+      <div class="absolute text-white top-7" id="toast"></div>
       <div class="overflow-auto max-h-screen flex flex-col justify-center">
         <main class="text-white max-w-sm px-4">
           <header>
@@ -51,7 +52,7 @@
                 type="text"
                 name="email"
                 class="w-full py-3 px-2 bg-transparent text-[#eee] outline-none"
-                placeholder="John" />
+                placeholder="example@gmaiil.com" />
             </div>
             <p class="text-red-700 text-sm" id="erroruseremail"></p>
             <!-- password -->
@@ -85,9 +86,10 @@
             <p class="text-red-700 text-sm" id="errorpassword"></p>
 
             <button
+              id="btn_submit"
               type="submit"
-              class="w-full font-bold rounded-lg py-3 mt-4 transition-colors bg-white text-black cursor-pointer">
-              Login
+              class="w-full font-bold rounded-lg py-3 mt-4 transition-colors bg-white text-black flex items-center justify-center gap-2">
+              <span id="btn_text">sign up</span>
             </button>
             <div class="flex justify-center">
               <p>
