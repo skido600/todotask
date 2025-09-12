@@ -63,7 +63,7 @@ const Login = async (req, res, next) => {
     if (!isMatch) {
       return HandleResponse(res, false, 401, "Invalid credentials");
     }
-    console.log({ username: userdetails.username });
+
     const token = jwt.sign(
       {
         username: userdetails.username,

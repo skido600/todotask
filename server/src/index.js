@@ -16,10 +16,9 @@ server.use(cors());
 server.use(cookieParser());
 server.use("/auth", authroute);
 server.use("/api", todoroute);
-// server.get("/test", (req, res) => {
-//   console.log("Test route hit");
-//   res.send("Server working");
-// });
+server.get("/", (req, res) => {
+  res.json({ message: "welcome" });
+});
 //listen
 //Error handling middleware
 server.use(HandleError);
