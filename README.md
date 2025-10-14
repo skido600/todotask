@@ -1,6 +1,6 @@
-📝 Simple To-Do App
+Simple To-Do App (Monolithic Repository)
 
-A minimal To-Do web application built with Express.js and HTML, featuring a simple authentication system.
+This is a simple To-Do web application built with Express.js and HTML, designed as a monolithic project — meaning both the frontend and backend are contained within a single repository.
 
 🚀 Features
 
@@ -8,50 +8,19 @@ Add, edit, and delete tasks
 
 Mark tasks as completed
 
-Basic user authentication (login & signup)
+Simple authentication (login & signup)
 
-Clean and simple UI
+Single codebase (monolith structure)
+
+Clean and minimal interface
 
 
 🛠️ Tech Stack
 
 Backend: Express.js
 
-Frontend: HTML, CSS
+Frontend: HTML, CSS, JavaScript
 
-Database: (Optional – you can specify if using one, e.g., MongoDB or local file)
+Architecture: Monolithic (all-in-one app)
 
-
-💡 Getting Started
-
-1. Clone this repository
-
-git clone https://github.com/yourusername/todo-app.git
-cd todo-app
-
-
-2. Install dependencies
-
-npm install
-
-
-3. Start the server
-
-npm start
-
-
-4. Open in your browser
-
-http://localhost:3000
-
-
-
-🔐 Authentication
-
-The app includes a simple authentication flow for users to sign up and log in before managing their tasks.
-
-🧑‍💻 Author
-
-Leowave
-
-GitHub: @Leo_wave
+Database: MongoDB, 
