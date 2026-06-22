@@ -3,6 +3,7 @@ import HandlSignup from "./signup.js";
 import Task from "./taskLogic.js";
 import checkTokenAndLogout from "./checkTokenAndLogout.js";
 import decodeToken from "./decode.js";
+
 window.addEventListener("load", () => {
   console.log("Current Page:", window.location.pathname);
   const loader = document.getElementById("loader");

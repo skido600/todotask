@@ -9,13 +9,19 @@ const TaskManager = mongoose.Schema(
     todo: {
       type: String,
     },
+    status: {
+      type: String,
+      enum: ["Pending", "In Progress", "Completed"],
+      default: "Pending",
+    },
+
     authoid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Task = mongoose.model("task", TaskManager);

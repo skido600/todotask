@@ -16,8 +16,8 @@ server.use(cors());
 server.use(cookieParser());
 server.use("/auth", authroute);
 server.use("/api", todoroute);
-server.get("/", (req, res) => {
-  res.json({ message: "welcome" });
+server.get("/healthy", (req, res) => {
+  res.json({ message: "yes am active" });
 });
 //listen
 //Error handling middleware

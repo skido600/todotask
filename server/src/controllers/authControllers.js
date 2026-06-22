@@ -22,7 +22,7 @@ const Signup = async (req, res, next) => {
         res,
         false,
         400,
-        "User with this email already exists"
+        "User with this email already exists",
       );
     }
 
@@ -38,7 +38,7 @@ const Signup = async (req, res, next) => {
       res,
       true,
       201,
-      `User ${newUser.username} successfully created`
+      `User ${newUser.username} successfully created`,
     );
   } catch (error) {
     next(error);
@@ -71,7 +71,7 @@ const Login = async (req, res, next) => {
         email: userdetails.email,
       },
       jwt_Token,
-      { expiresIn: "30mins" }
+      { expiresIn: "4d" },
     );
 
     if (!token) {

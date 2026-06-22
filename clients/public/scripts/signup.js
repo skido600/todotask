@@ -1,6 +1,7 @@
 import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import ToggleHandle from "./ToggleFucntion.js";
 import showToast from "./showToast.js";
+const url = "http://localhost:7000";
 function HandlSignup() {
   const passwordInput = document.getElementById("password");
   const toggleIcon = document.getElementById("visibility");
@@ -49,14 +50,11 @@ function HandlSignup() {
     if (isValid) {
       showButtonLoader();
       try {
-        const res = await fetch(
-          "https://todotask-4.onrender.com/auth/createuser",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, email, password }),
-          }
-        );
+        const res = await fetch(`${url}/auth/createuser`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, email, password }),
+        });
 
         const response = await res.json();
 

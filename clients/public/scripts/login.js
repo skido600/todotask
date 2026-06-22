@@ -1,7 +1,7 @@
 import ToggleHandle from "./ToggleFucntion.js";
 import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import showToast from "./showToast.js";
-
+const url = "http://localhost:7000";
 function Loginauth() {
   const error_username_email = document.getElementById("erroruseremail");
   const errorpassword = document.getElementById("errorpassword");
@@ -41,14 +41,11 @@ function Loginauth() {
     if (isValid) {
       showButtonLoader();
       try {
-        const res = await fetch(
-          "https://todotask-4.onrender.com/auth/loginuser",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: email_username, password }),
-          }
-        );
+        const res = await fetch(`${url}/auth/loginuser`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email_username, password }),
+        });
 
         const response = await res.json();
 

@@ -3,7 +3,7 @@ import decodeToken from "./decode.js";
 import logout from "./logout.js";
 import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import showToast from "./showToast.js";
-
+const API_URL = "http://localhost:7000/api";
 function Task() {
   const taskForm = document.getElementById("taskForm");
   const taskTitle = document.getElementById("taskTitle");
@@ -31,7 +31,6 @@ function Task() {
   checkTokenAndLogout(userData);
 
   admin_name.textContent = ` Welcome, ${userData.username} 👋`;
-  const API_URL = "https://todotask-4.onrender.com/api";
 
   // Sidebar toggle
   toggleBtn.addEventListener("click", () => {
@@ -61,7 +60,7 @@ function Task() {
       });
 
       const tasks = await res.json();
-
+      console.log(tasks, "from data task");
       const taskdata = tasks.data;
       //if task is empty
       if (!taskdata || taskdata.length === 0) {
@@ -80,48 +79,85 @@ function Task() {
       hideButtonLoader("Add Task");
     }
   }
-
   function renderTask(task, existingLi) {
     const li = existingLi || document.createElement("li");
     li.className =
       "bg-white p-3 rounded-lg border border-gray-300 shadow space-y-2";
-    const timestamp = document.createElement("p");
-    timestamp.className = "text-[10px] mt-4";
-    li.dataset.id = task._id;
 
+    li.dataset.id = task._id;
     li.innerHTML = "";
 
-    const titleText = task.description;
-    task.description.charAt(0).toUpperCase() + task.description.slice(1);
-
+    // TITLE
     const header = document.createElement("h3");
-    header.textContent = titleText;
+    header.textContent = task.description;
     header.className = "font-semibold text-lg";
-    timestamp.textContent = `Created at ${task.createdAt}`;
 
+    // STATUS
+    const status = document.createElement("span");
+    status.textContent = task.status || "Pending";
+
+    status.className =
+      task.status === "Completed"
+        ? "text-white bg-green-500 px-4 rounded text-sm"
+        : task.status === "In Progress"
+          ? "text-white bg-blue-500 px-4 rounded text-sm"
+          : "text-white bg-yellow-500 px-4 rounded text-sm";
+
+    // DESCRIPTION
     const description = document.createElement("p");
     description.textContent = task.todo || "No Description";
     description.className = "text-gray-700 text-sm";
 
+    // TIME
+    const timestamp = document.createElement("p");
+    timestamp.className = "text-sm mt-2 text-gray-500";
+    timestamp.textContent = `Created at ${task.createdAt}`;
+
+    // ACTIONS
     const actions = document.createElement("div");
-    actions.className = "space-x-2";
+    actions.className = "space-x-2 mt-2";
 
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.className =
-      "px-2 py-1 bg-yellow-500 text-sm text-white rounded hover:bg-yellow-600 transition";
-    editBtn.onclick = () => startEdit(task, li);
-
+    // ALWAYS SHOW DELETE (your requirement)
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-    deleteBtn.className =
-      "px-2 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition";
+    deleteBtn.className = "px-2 py-1 bg-red-600 text-white text-sm rounded";
     deleteBtn.onclick = () => deleteTask(task._id, li);
 
-    actions.append(editBtn, deleteBtn);
-    li.append(header, description, timestamp, actions);
+    // 🟢 IF COMPLETED → ONLY DELETE
+    if (task.status === "Completed") {
+      actions.append(deleteBtn);
+    }
 
-    // Only append if this is a new task
+    // 🟡 NOT COMPLETED → FULL CONTROLS
+    else {
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.className = "px-2 py-1 bg-yellow-500 text-white text-sm rounded";
+      editBtn.onclick = () => startEdit(task, li);
+
+      const doneBtn = document.createElement("button");
+      doneBtn.textContent = "Done";
+      doneBtn.className = "px-2 py-1 bg-green-600 text-white text-sm rounded";
+
+      doneBtn.onclick = async () => {
+        await fetch(`${API_URL}/status/${task._id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: "Completed" }),
+        });
+
+        fetchTasks();
+      };
+
+      actions.append(editBtn, deleteBtn, doneBtn);
+    }
+
+    // FINAL RENDER
+    li.append(header, status, description, timestamp, actions);
+
     if (!existingLi) taskList.appendChild(li);
   }
   // Create new task
