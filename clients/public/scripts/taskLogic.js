@@ -3,7 +3,7 @@ import decodeToken from "./decode.js";
 import logout from "./logout.js";
 import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import showToast from "./showToast.js";
-const API_URL = "http://localhost:7000/api";
+const API_URL = "https://todotask-6.onrender.com/api";
 function Task() {
   const taskForm = document.getElementById("taskForm");
   const taskTitle = document.getElementById("taskTitle");

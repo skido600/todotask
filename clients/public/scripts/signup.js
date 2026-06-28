@@ -1,7 +1,7 @@
 import { showButtonLoader, hideButtonLoader } from "./Loader.js";
 import ToggleHandle from "./ToggleFucntion.js";
 import showToast from "./showToast.js";
-const url = "http://localhost:7000";
+const url = "hhttps://todotask-6.onrender.com";
 function HandlSignup() {
   const passwordInput = document.getElementById("password");
   const toggleIcon = document.getElementById("visibility");
